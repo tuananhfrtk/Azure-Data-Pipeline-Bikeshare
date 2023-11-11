@@ -1,0 +1,47 @@
+{
+	"name": "Pipeline Load Aggregate Data Flow",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow Aggregate",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Dataflow Aggregate Data",
+						"type": "DataFlowReference",
+						"parameters": {
+							"dataflow_param_fiscalyear": {
+								"value": "2020",
+								"type": "Expression"
+							}
+						}
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_storage_account",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnycpayroll-anh-lastintial/dirstaging"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-11-11T03:30:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
